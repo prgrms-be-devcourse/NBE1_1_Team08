@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mariadb://svc.sel5.cloudtype.app:30739/COFFEESHOP
+    username: root
+    password: 1234
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/views/
+#      suffix: .jsp
+
+file:
+  upload-dir: upload-dir
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+
+# Logging 설정 (필요에 따라 조정)
+logging:
+  level:
+    root: info
+    org.springframework: INF O
+    com.security.day0904 : debug # 자신의 패키지명을 사용하여 디버그 레벨을 설정합니다.
