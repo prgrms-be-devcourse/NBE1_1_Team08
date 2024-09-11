@@ -51,7 +51,7 @@ public class ProductService {
         int topNum = 3; // 상위 상품 N개
         Pageable pageable = PageRequest.of(0, topNum);
 
-        return convertToProductInfoDTOs(productRepository.findPopularProducts(pageable));
+        return convertToProductInfoDTOs(productRepository.findPopularProducts(pageable).getContent());
     }
 
     public List<ProductInfoDTO> convertToProductInfoDTOs(List<Products> input){
