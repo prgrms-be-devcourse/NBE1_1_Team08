@@ -6,6 +6,11 @@ import com.demo.coffeeshop.model.entity.Orders;
 import com.demo.coffeeshop.model.entity.enums.OrderStatus;
 import com.demo.coffeeshop.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,20 +48,22 @@ public class OrderController {
         orderService.cancelOrder(id);
         return ResponseEntity.ok().body("sucess");
     }
-
+// Page size의 기본은 10씩 createdAt
     @GetMapping("/list")
-    public ResponseEntity<List<Orders>> list(){
-        List<Orders> orders = orderService.findOrders();
+    public ResponseEntity<Page<Orders>> list(@PageableDefault(sort = "updatedAt", direction = Sort.Direction.DESC)Pageable pageable) {
+        Page<Orders> orders = orderService.findOrders(pageable);
         return ResponseEntity.ok().body(orders);
     }
 
     @GetMapping("/listEmail")
-    public ResponseEntity<List<Orders>> listEmail(@RequestParam("email") String email){
-        return ResponseEntity.ok().body(orderService.findByEmail(email));
+    public ResponseEntity<Page<Orders>> listEmail(@RequestParam("email") String email, @PageableDefault(sort = "updatedAt", direction = Sort.Direction.DESC)Pageable pageable) {
+        Page<Orders> orders = orderService.findByEmail(email, pageable);
+        return ResponseEntity.ok().body(orders);
     }
 
     @GetMapping("/listStatus")
-    public ResponseEntity<List<Orders>> listStatus(@RequestParam("status") OrderStatus status){
-        return ResponseEntity.ok().body(orderService.findByOrderStatus(status));
+    public ResponseEntity<Page<Orders>> listStatus(@RequestParam("status") OrderStatus status, @PageableDefault(sort = "updatedAt", direction = Sort.Direction.DESC)Pageable pageable) {
+        Page<Orders> orders = orderService.findByOrderStatus(status, pageable);
+        return ResponseEntity.ok().body(orders);
     }
 }
