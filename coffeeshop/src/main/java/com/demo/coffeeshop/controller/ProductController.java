@@ -6,6 +6,10 @@ import com.demo.coffeeshop.model.dto.ProductUpdateDTO;
 import com.demo.coffeeshop.model.entity.Products;
 import com.demo.coffeeshop.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,9 +51,10 @@ public class ProductController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<ProductInfoDTO>> list(){
-        List<ProductInfoDTO> dtos = productService.showProducts();
-        return ResponseEntity.ok().body(dtos);
+    public ResponseEntity<Page<ProductInfoDTO>> list(
+            @PageableDefault(size = 10, sort = "productName", direction = Sort.Direction.ASC) Pageable pageable) {
+        Page<ProductInfoDTO> products = productService.showProducts(pageable);
+        return ResponseEntity.ok().body(products);
     }
 
     @GetMapping("/{id}")
