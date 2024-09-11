@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -49,31 +50,11 @@ public class ProductService {
         return convertToProductInfoDTOs(productRepository.findAll());
     }
 
-    public List<ProductInfoDTO> showPopularProducts(){
-        int topNum = 3; // 인기 상품 수
+    public List<ProductInfoDTO> showPopularProducts() {
+        int topNum = 3; // 상위 상품 N개
+        Pageable pageable = PageRequest.of(0, topNum);
 
-        Map<UUID, Long> productSalesCount = calculateProductSalesCount();
-
-        List<Products> popularProductList = productSalesCount.entrySet().stream()
-                .sorted(Map.Entry.<UUID, Long>comparingByValue().reversed())
-                .limit(topNum)
-                .map(entry -> productRepository.findByProductId(entry.getKey()))
-                .collect(Collectors.toList());
-
-        return convertToProductInfoDTOs(popularProductList);
-    }
-
-    private Map<UUID, Long> calculateProductSalesCount() {
-        Map<UUID, Long> productSalesCount = productRepository.findAll().stream()
-                .collect(Collectors.toMap(Products::getProductId, product -> 0L));
-
-        orderRepository.findAll().forEach(order -> {
-            order.getOrderItems().forEach(orderItem -> {
-                UUID productId = orderItem.getProducts().getProductId();
-                productSalesCount.merge(productId, orderItem.getQuantity(), Long::sum);
-            });
-        });
-        return productSalesCount;
+        return convertToProductInfoDTOs(productRepository.findPopularProducts(pageable));
     }
 
     public List<ProductInfoDTO> convertToProductInfoDTOs(List<Products> input){

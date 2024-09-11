@@ -52,10 +52,9 @@ public class ProductController {
         return ResponseEntity.ok().body(dtos);
     }
 
-    @GetMapping("/recommend")
-    public ResponseEntity<List<ProductInfoDTO>> recommend(){
-        List<ProductInfoDTO> dtos = productService.showPopularProducts();
-        return ResponseEntity.ok().body(dtos);
+    @GetMapping("/popular")
+    public List<ProductInfoDTO> popularList(){
+        return productService.showPopularProducts();
     }
 
     @GetMapping("/{id}")
