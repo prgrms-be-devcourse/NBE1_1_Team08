@@ -16,24 +16,17 @@ spring:
       hibernate:
         format_sql: true
 
+  profiles:
+    active: dev
+
 #  mvc:
 #    view:
 #      prefix: /WEB-INF/views/
 #      suffix: .jsp
 
-file:
-  upload-dir: upload-dir
-
-  servlet:
-    multipart:
-      enabled: true
-      max-file-size: 100MB
-      max-request-size: 100MB
-
-
 # Logging 설정 (필요에 따라 조정)
 logging:
   level:
     root: info
-    org.springframework: INF O
-    com.security.day0904 : debug # 자신의 패키지명을 사용하여 디버그 레벨을 설정합니다.
+    com.demo.coffeeshop : debug
+#    com.security.day0904 : debug # 자신의 패키지명을 사용하여 디버그 레벨을 설정합니다.

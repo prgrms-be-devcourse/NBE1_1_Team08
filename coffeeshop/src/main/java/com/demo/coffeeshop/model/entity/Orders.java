@@ -91,11 +91,9 @@ public class Orders {
     }
     
     public void cancel(){
-        if(this.orderStatus == OrderStatus.ACCEPTED || this.orderStatus == OrderStatus.PAYMENT_CONFIRMED){
-            this.orderStatus = OrderStatus.CANCELLED;
-        }else{
-            throw new IllegalStateException("배송이 시작되어 주문 취소가 불가합니다.");
-        }
+        if(!(this.orderStatus == OrderStatus.PAYMENT_CONFIRMED && this.orderStatus == OrderStatus.ACCEPTED))
+            throw new IllegalStateException("배송을 취소할 수 없는 상태 입니다");
+        this.orderStatus = OrderStatus.CANCELLED;
     }
 
     @Override
