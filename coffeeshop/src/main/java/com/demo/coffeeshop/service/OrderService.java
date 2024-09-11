@@ -26,12 +26,19 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     @Transactional
-    public UUID order(OrderRequestDTO orderRequest) {
+    public UUID order(OrderRequestDTO orderRequest) throws Exception {
         List<OrderItems> orderItems = new ArrayList<>();
 
         for (OrderRequestDTO.OrderItem item : orderRequest.getOrderItems()) {
             Products product = productRepository.findByProductId(item.getId());
+
+            if(product.getStock() < item.getQuantity()){
+                throw new Exception("재고수량 부족으로 구매가 불가한 상품이 있습니다.");
+            }
             orderItems.add(new OrderItems(product, item.getQuantity()));
+            //제품 재고 변경
+            product.changeStock(product.getStock() - item.getQuantity());
+            productRepository.save(product);
         }
 
         Orders order = Orders.createOrder(orderRequest.getEmail(),
