@@ -12,7 +12,6 @@ const OrderPage = () => {
     const updatedItems = found
       ? items.map(v => (v.productId === id ? { ...v, count: v.count + 1 } : v))
       : [...items, { ...product, count: 1 }];
-    console.log(items);
     setItems(updatedItems);
   };
 
@@ -24,7 +23,6 @@ const OrderPage = () => {
     } catch (error) {
       console.log(error);
     }
-    console.log('hello');
   }, []);
 
   return (

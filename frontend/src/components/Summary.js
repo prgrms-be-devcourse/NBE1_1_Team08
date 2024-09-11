@@ -34,7 +34,6 @@ const Summary = ({ items = [] }) => {
       return;
     }
 
-    console.log(items);
     axios
       .post('http://localhost:8080/order/add', {
         email: order.email,
