@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SummaryItem } from './SummaryItem';
 import axios from 'axios';
 
-export function Summary({ items = [] }) {
+const Summary = ({ items = [] }) => {
   const totalPrice = items.reduce(
     (prev, curr) => prev + curr.price * curr.count,
     0,
@@ -40,7 +40,7 @@ export function Summary({ items = [] }) {
         address: order.address,
         postcode: order.postcode,
         orderItems: items.map(v => ({
-          productId: v.id,
+          productId: v.productId,
           category: v.category,
           price: v.price,
           quantity: v.count,
@@ -54,7 +54,7 @@ export function Summary({ items = [] }) {
   };
 
   return (
-    <React.Component>
+    <>
       <div>
         <h5 className="m-0 p-0">
           <b>Summary</b>
@@ -62,7 +62,7 @@ export function Summary({ items = [] }) {
       </div>
       <hr />
       {items.map(v => (
-        <SummaryItem key={v.id} name={v.name} count={v.count} />
+        <SummaryItem key={v.productId} name={v.productName} count={v.count} />
       ))}
       <form>
         <div className="mb-3">
@@ -110,6 +110,8 @@ export function Summary({ items = [] }) {
       <button className="btn btn-dark col-12" onClick={handleSubmit}>
         결제하기
       </button>
-    </React.Component>
+    </>
   );
-}
+};
+
+export default Summary;

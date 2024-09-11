@@ -1,14 +1,13 @@
 import React from 'react';
 
-export function Product({ id, name, category, price, onAddClick }) {
+const Product = ({ productId, productName, category, price, onAddClick }) => {
   const handleAddBtnClick = () => {
-    onAddClick(id);
+    onAddClick(productId);
   };
-  console.log('product id', id);
 
   return (
-    <React.Component>
-      <li key={id} className="list-group-item d-flex mt-3">
+    <>
+      <li key={productId} className="list-group-item d-flex mt-3">
         <div className="col-2">
           <img
             className="img-fluid"
@@ -18,7 +17,7 @@ export function Product({ id, name, category, price, onAddClick }) {
         </div>
         <div className="col">
           <div className="row text-muted">{category}</div>
-          <div className="row">{name}</div>
+          <div className="row">{productName}</div>
         </div>
         <div className="col text-center price">{price}원</div>
         <div className="col text-end action">
@@ -30,6 +29,8 @@ export function Product({ id, name, category, price, onAddClick }) {
           </button>
         </div>
       </li>
-    </React.Component>
+    </>
   );
-}
+};
+
+export default Product;

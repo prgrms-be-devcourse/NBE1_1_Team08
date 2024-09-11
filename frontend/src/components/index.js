@@ -1,2 +1,5 @@
-export { ProductList } from './ProductList';
-export { Summary } from './Summary';
+import PageHeader from './PageHeader';
+import ProductList from './ProductList';
+import Summary from './Summary';
+
+export { ProductList, Summary, PageHeader };

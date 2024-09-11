@@ -1,9 +1,9 @@
 import React from 'react';
 import { Product } from './Product';
 
-export function ProductList({ products = [], onAddClick }) {
+const ProductList = ({ products = [], onAddClick }) => {
   return (
-    <React.Component>
+    <>
       <h5 className="flex-grow-0">
         <b>상품 목록</b>
       </h5>
@@ -12,6 +12,8 @@ export function ProductList({ products = [], onAddClick }) {
           <Product {...v} key={v.id} onAddClick={onAddClick} />
         ))}
       </ul>
-    </React.Component>
+    </>
   );
-}
+};
+
+export default ProductList;
