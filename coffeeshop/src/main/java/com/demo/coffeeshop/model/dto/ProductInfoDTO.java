@@ -14,7 +14,7 @@ public class ProductInfoDTO {
     private UUID productId;
     private String productName;
     private String catagory;
-    private int price;
+    private long price;
     private String description;
     private String image_url;
 

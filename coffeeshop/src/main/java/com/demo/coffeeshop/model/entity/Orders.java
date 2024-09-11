@@ -19,7 +19,9 @@ import java.util.regex.Pattern;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-@Entity(name = "orders")
+@Table(name = "orders", indexes = {
+        @Index(name = "idx_email", columnList = "email")
+})
 public class Orders {
 
     @Id

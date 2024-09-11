@@ -6,13 +6,13 @@ CREATE TABLE products
     product_id   BINARY(36) PRIMARY KEY,
     product_name VARCHAR(20) NOT NULL,
     category     VARCHAR(50) NOT NULL,
-    price        BIGINT NOT NULL,
+    price        bigint      NOT NULL,
+    stock        bigint      NOT NULL,
     description  VARCHAR(500) DEFAULT NULL,
-    image_url    VARCHAR(255) NOT NULL,
-    created_at   DATETIME(6) NOT NULL,
-    updated_at   DATETIME(6) DEFAULT NULL
+    image_url	   VARCHAR(500) NOT	NULL,
+    created_at   datetime(6) NOT NULL,
+    updated_at   datetime(6)  DEFAULT NULL
 );
-
 
 CREATE TABLE orders
 (
@@ -22,12 +22,13 @@ CREATE TABLE orders
     postcode     VARCHAR(200) NOT NULL,
     order_status VARCHAR(50)  NOT NULL,
     created_at   datetime(6)  NOT NULL,
-    updated_at   datetime(6) DEFAULT NULL
+    updated_at   datetime(6) DEFAULT NULL,
+    INDEX idx_email (email)  -- email 컬럼에 인덱스 추가
 );
 
 CREATE TABLE order_items
 (
-    seq        bigint      PRIMARY KEY AUTO_INCREMENT,
+    seq        bigint      NOT NULL PRIMARY KEY AUTO_INCREMENT,
     order_id   binary(36)  NOT NULL,
     product_id binary(36)  NOT NULL,
     category   VARCHAR(50) NOT NULL,

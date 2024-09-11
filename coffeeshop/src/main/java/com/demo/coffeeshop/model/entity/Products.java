@@ -1,10 +1,7 @@
 package com.demo.coffeeshop.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @ToString
 @Entity(name = "products")
@@ -29,7 +26,9 @@ public class Products {
     @Column(length = 50)
     private String category;
 
-    private int price;
+    private long price;
+
+    private long stock;
 
     @Column(length = 500)
     private String description;
