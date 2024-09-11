@@ -1,7 +1,13 @@
 import React from 'react';
 import Product from './Product';
+import Pagination from './Pagination';
 
-const ProductList = ({ products = [], onAddClick }) => {
+const ProductList = ({
+  products = [],
+  onAddClick,
+  totalPages,
+  handlePageChanged,
+}) => {
   return (
     <>
       <h5 className="flex-grow-0">
@@ -13,6 +19,9 @@ const ProductList = ({ products = [], onAddClick }) => {
             <Product {...v} key={v.id} onAddClick={onAddClick} />
           ))}
         </ul>
+        <div className="pagination-container">
+          <Pagination pageCount={totalPages} onPageChange={handlePageChanged} />
+        </div>
       </div>
     </>
   );

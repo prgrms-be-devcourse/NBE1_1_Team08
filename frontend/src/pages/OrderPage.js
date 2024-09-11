@@ -5,6 +5,19 @@ import axios from 'axios';
 const OrderPage = () => {
   const [products, setProducts] = useState([]);
   const [items, setItems] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
+
+  const getProducts = async page => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/product/list?page=${page}`,
+      );
+      setProducts(response.data.content);
+      setTotalPages(response.data.totalPages);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleAddBtnClick = id => {
     const product = products.find(v => v.productId === id);
@@ -14,15 +27,12 @@ const OrderPage = () => {
       : [...items, { ...product, count: 1 }];
     setItems(updatedItems);
   };
+  const handlePageChanged = e => {
+    getProducts(e.selected);
+  };
 
   useEffect(() => {
-    try {
-      axios
-        .get('http://localhost:8080/product/list')
-        .then(v => setProducts(v.data.content));
-    } catch (error) {
-      console.log(error);
-    }
+    getProducts(0);
   }, []);
 
   return (
@@ -31,7 +41,12 @@ const OrderPage = () => {
       <div className="card">
         <div className="row">
           <div className="col-md-8 mt-4 d-flex flex-column align-items-start p-3 pt-0">
-            <ProductList products={products} onAddClick={handleAddBtnClick} />
+            <ProductList
+              products={products}
+              onAddClick={handleAddBtnClick}
+              totalPages={totalPages}
+              handlePageChanged={handlePageChanged}
+            />
           </div>
           <div className="col-md-4 summary p-4">
             <Summary items={items} />
