@@ -44,18 +44,25 @@ public class Products {
     @Column(length = 6)
     private LocalDateTime updatedAt;
 
-    public Products(String productName, String catagory, long price, String description, String image_url) {
+    public Products(String productName, String catagory, long price, long stock, String description, String image_url) {
         this.productName = productName;
         this.category = catagory;
         this.price = price;
+        this.stock = stock;
         this.description = description;
         this.image_url = image_url;
     }
 
-    public void changeInfo(String catagory, long price, String description, String image_url){
+    public void changeInfo(String catagory, long price, long stock, String description, String image_url){
         this.category = catagory;
         this.price = price;
+        this.stock = stock;
         this.description = description;
         this.image_url = image_url;
     }
+
+    public void changeStock(long stock){
+        this.stock = stock;
+    }
+
 }

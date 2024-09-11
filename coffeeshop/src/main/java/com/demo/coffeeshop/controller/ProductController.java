@@ -30,6 +30,7 @@ public class ProductController {
         Products product = productService.addProduct(new Products(dto.getProductName(),
                 dto.getCatagory(),
                 dto.getPrice(),
+                dto.getStock(),
                 dto.getDescription(),
                 dto.getImage_url()));
 

@@ -26,7 +26,7 @@ public class OrderController {
 
 
     @PostMapping("/add")
-    public ResponseEntity<UUID> add(@RequestBody OrderRequestDTO dto){
+    public ResponseEntity<UUID> add(@RequestBody OrderRequestDTO dto) throws Exception {
         UUID id = orderService.order(dto);
         return ResponseEntity.ok().body(id);
     }

@@ -28,7 +28,7 @@ public class ProductService {
     @Transactional
     public Products updateProduct(ProductUpdateDTO dto){
         Products product = productRepository.findByProductId(dto.getId());
-        product.changeInfo(dto.getCatagory(), dto.getPrice(), dto.getDescription(), dto.getImage_url());
+        product.changeInfo(dto.getCatagory(), dto.getPrice(), dto.getStock(), dto.getDescription(), dto.getImage_url());
         return productRepository.save(product);
     }
 

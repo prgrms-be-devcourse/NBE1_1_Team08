@@ -13,6 +13,7 @@ public class ProductUpdateDTO {
     private String productName;
     private String catagory;
     private long price;
+    private long stock;
     private String description;
     private String image_url;
 }
