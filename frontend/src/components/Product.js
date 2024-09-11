@@ -1,6 +1,13 @@
 import React from 'react';
 
-const Product = ({ productId, productName, category, price, onAddClick }) => {
+const Product = ({
+  productId,
+  productName,
+  category,
+  price,
+  image_url,
+  onAddClick,
+}) => {
   const handleAddBtnClick = () => {
     onAddClick(productId);
   };
@@ -9,11 +16,7 @@ const Product = ({ productId, productName, category, price, onAddClick }) => {
     <>
       <li key={productId} className="list-group-item d-flex mt-3">
         <div className="col-2">
-          <img
-            className="img-fluid"
-            src="https://i.imgur.com/HKOFQYa.jpeg"
-            alt=""
-          />
+          <img className="img-fluid" src={image_url} alt="" />
         </div>
         <div className="col">
           <div className="row text-muted">{category}</div>
