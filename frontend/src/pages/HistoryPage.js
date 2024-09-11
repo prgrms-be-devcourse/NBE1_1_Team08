@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { PageHeader, HistoryList } from '../components';
 import axios from 'axios';
 
@@ -22,12 +22,6 @@ const HistoryPage = () => {
   const handleEmailChanged = e => {
     setEmail(e.target.value);
   };
-  const handleCancleSuccess = () => {
-    getHistories();
-  };
-  const handleSearchClicked = () => {
-    getHistories();
-  };
 
   return (
     <div className="container-fluid">
@@ -36,7 +30,7 @@ const HistoryPage = () => {
         <div className="row">
           <div className="order-email-search mb-3">
             <label htmlFor="email" className="form-label">
-              주문한 이메일
+              Email
             </label>
             <input
               type="email"
@@ -47,7 +41,7 @@ const HistoryPage = () => {
             />
             <button
               className="btn btn-sm btn-outline-dark me-2"
-              onClick={handleSearchClicked}
+              onClick={getHistories}
             >
               검색
             </button>
@@ -56,7 +50,7 @@ const HistoryPage = () => {
             <div className="mt-4 d-flex flex-column align-items-start p-3 pt-0">
               <HistoryList
                 histories={histories}
-                handleCancleSuccess={handleCancleSuccess}
+                handleCancleSuccess={getHistories}
               />
             </div>
           ) : (
