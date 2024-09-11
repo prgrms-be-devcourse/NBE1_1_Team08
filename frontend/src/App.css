@@ -82,8 +82,15 @@
   }
 }
 
-.product-container {
-  height: 500px;
+.card-container {
+  max-height: 650px;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.summary-item-container {
+  height: 200px;
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;

@@ -1,4 +1,6 @@
 import React from 'react';
+import { FiPlus } from 'react-icons/fi';
+import { formatPrice } from '../common';
 
 const Product = ({
   productId,
@@ -22,13 +24,13 @@ const Product = ({
           <div className="row text-muted">{category}</div>
           <div className="row">{productName}</div>
         </div>
-        <div className="col text-center price">{price}원</div>
+        <div className="col text-center price">{formatPrice(price)}</div>
         <div className="col text-end action">
           <button
             onClick={handleAddBtnClick}
             className="btn btn-small btn-outline-dark"
           >
-            추가
+            <FiPlus />
           </button>
         </div>
       </li>

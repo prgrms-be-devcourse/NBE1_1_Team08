@@ -55,7 +55,7 @@ const HistoryPage = () => {
             </button>
           </div>
           {isSearched ? (
-            <div className="mt-4 d-flex flex-column align-items-start p-3 pt-0">
+            <div className="card-container mt-4 d-flex flex-column align-items-start p-3 pt-0">
               <HistoryList
                 histories={histories}
                 handleCancleSuccess={() => getHistories(page.current)}

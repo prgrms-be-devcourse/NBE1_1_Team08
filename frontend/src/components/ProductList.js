@@ -13,7 +13,7 @@ const ProductList = ({
       <h5 className="flex-grow-0">
         <b>Products</b>
       </h5>
-      <div className="product-container">
+      <div className="card-container">
         <ul className="list-group products">
           {products.map(v => (
             <Product {...v} key={v.id} onAddClick={onAddClick} />
