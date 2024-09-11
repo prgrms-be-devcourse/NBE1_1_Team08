@@ -15,6 +15,7 @@ public class ProductInfoDTO {
     private String productName;
     private String catagory;
     private long price;
+    private long stock;
     private String description;
     private String image_url;
 
@@ -23,6 +24,7 @@ public class ProductInfoDTO {
         this.productName = products.getProductName();
         this.catagory = products.getCategory();
         this.price = products.getPrice();
+        this.stock = products.getStock();
         this.description = products.getDescription();
         this.image_url = products.getImage_url();
     }
