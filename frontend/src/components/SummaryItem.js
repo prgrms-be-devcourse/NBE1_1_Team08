@@ -1,13 +1,15 @@
 import React from 'react';
 import { FiMinus } from 'react-icons/fi';
 
-const SummaryItem = ({ id, name, count, onMinusItemClicked }) => {
+const SummaryItem = ({ id, name, quantity, onMinusItemClicked }) => {
   return (
     <>
       <div className="row">
         <h6 className="p-0 px-3">
           {name}{' '}
-          <span className="badge bg-info text-bg-secondary text-">{count}</span>
+          <span className="badge bg-info text-bg-secondary text-">
+            {quantity}
+          </span>
           <span
             className="badge bg-secondary text-bg-secondary ms-1"
             onClick={() => onMinusItemClicked(id)}

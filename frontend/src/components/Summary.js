@@ -39,7 +39,7 @@ const Summary = ({ items = [], handleMinusItem }) => {
         postcode: order.postcode,
         orderItems: items.map(v => ({
           id: v.productId,
-          quantity: v.count,
+          quantity: v.quantity,
         })),
       })
       .then(
@@ -63,7 +63,7 @@ const Summary = ({ items = [], handleMinusItem }) => {
             key={v.productId}
             id={v.productId}
             name={v.productName}
-            count={v.count}
+            quantity={v.quantity}
             onMinusItemClicked={handleMinusItem}
           />
         ))}
