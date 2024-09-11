@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -49,33 +50,30 @@ public class ProductService {
     }
 
     public List<ProductInfoDTO> showPopularProducts(){
-        List<Products> popularProductList = new ArrayList<>();
         int topNum = 3; // 인기 상품 수
-        List<Orders> ordersList = orderRepository.findAll();
-        Map<UUID, Long> checkProducts = new HashMap<>();
 
-        for (Products product : productRepository.findAll()) {
-            checkProducts.put(product.getProductId(), 0L);
-        }
+        Map<UUID, Long> productSalesCount = calculateProductSalesCount();
 
-        for (Orders orders : ordersList) {
-            List<OrderItems> orderItemsList = orders.getOrderItems();
-            for (OrderItems orderItems : orderItemsList) {
-                UUID productId = orderItems.getProducts().getProductId();
-                Long quantity = orderItems.getQuantity();
-                // 추후 삭제
-                System.out.println(orderItems.getProducts().getProductId() + " " + orderItems.getProducts().getProductName() + " " +quantity);
-                checkProducts.put(productId, checkProducts.get(productId) + quantity);
-            }
-        }
+        List<Products> popularProductList = productSalesCount.entrySet().stream()
+                .sorted(Map.Entry.<UUID, Long>comparingByValue().reversed())
+                .limit(topNum)
+                .map(entry -> productRepository.findByProductId(entry.getKey()))
+                .collect(Collectors.toList());
 
-        List<Map.Entry<UUID, Long>> entryList = new ArrayList<>(checkProducts.entrySet());
-        entryList.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
-
-        for (int i = 0; i < topNum; i++) {
-            popularProductList.add(productRepository.findByProductId(entryList.get(i).getKey()));
-        }
         return convertToProductInfoDTOs(popularProductList);
+    }
+
+    private Map<UUID, Long> calculateProductSalesCount() {
+        Map<UUID, Long> productSalesCount = productRepository.findAll().stream()
+                .collect(Collectors.toMap(Products::getProductId, product -> 0L));
+
+        orderRepository.findAll().forEach(order -> {
+            order.getOrderItems().forEach(orderItem -> {
+                UUID productId = orderItem.getProducts().getProductId();
+                productSalesCount.merge(productId, orderItem.getQuantity(), Long::sum);
+            });
+        });
+        return productSalesCount;
     }
 
     public List<ProductInfoDTO> convertToProductInfoDTOs(List<Products> input){
