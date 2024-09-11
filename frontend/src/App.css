@@ -102,3 +102,14 @@ hr {
 .products .action {
   line-height: 38px;
 }
+
+.order-email-search {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 100px;
+}
+.order-email-search .email {
+  margin: 10px;
+  width: auto;
+}

@@ -9,6 +9,12 @@ const PageHeader = () => {
         <Link to="/">
           <button className="btn btn-dark">Main</button>
         </Link>
+        <Link to="/order">
+          <button className="btn btn-dark">Order</button>
+        </Link>
+        <Link to="/order-history">
+          <button className="btn btn-dark">History</button>
+        </Link>
       </div>
     </div>
   );
