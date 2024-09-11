@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PageHeader } from '../components';
 
-const MainPage = () => {
+const MainRoute = () => {
   const [topProducts, setTopProducts] = useState();
 
   useEffect(() => {
@@ -24,4 +24,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default MainRoute;

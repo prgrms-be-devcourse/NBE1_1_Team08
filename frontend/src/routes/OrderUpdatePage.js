@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { PageHeader, OrderForm } from '../components';
 import axios from 'axios';
 
-const OrderUpdatePage = () => {
+const OrderUpdateRoute = () => {
   const location = useLocation();
   const { id, email, address, postcode } = location.state || {};
   const [order, setOrder] = useState({
@@ -59,4 +59,4 @@ const OrderUpdatePage = () => {
   );
 };
 
-export default OrderUpdatePage;
+export default OrderUpdateRoute;

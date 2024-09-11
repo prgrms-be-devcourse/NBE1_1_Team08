@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { PageHeader, HistoryList, Pagination } from '../components';
 import axios from 'axios';
 
-const HistoryPage = () => {
+const HistoryRoute = () => {
   const [email, setEmail] = useState();
   const [histories, setHistories] = useState();
   const [page, setPage] = useState();
@@ -78,4 +78,4 @@ const HistoryPage = () => {
   );
 };
 
-export default HistoryPage;
+export default HistoryRoute;

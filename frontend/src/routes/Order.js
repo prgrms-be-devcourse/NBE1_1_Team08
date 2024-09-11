@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ProductList, PageHeader, Summary } from '../components';
 import axios from 'axios';
 
-const OrderPage = () => {
+const OrderRoute = () => {
   const [products, setProducts] = useState([]);
   const [items, setItems] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
@@ -70,4 +70,4 @@ const OrderPage = () => {
   );
 };
 
-export default OrderPage;
+export default OrderRoute;
