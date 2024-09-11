@@ -87,8 +87,8 @@ public class Orders {
     }
     
     public void cancel(){
-        if(this.orderStatus == OrderStatus.CANCELLED || this.orderStatus == OrderStatus.SHIPPED)
-            throw new IllegalStateException("Already Delivered");
+        if(!(this.orderStatus == OrderStatus.PAYMENT_CONFIRMED && this.orderStatus == OrderStatus.ACCEPTED))
+            throw new IllegalStateException("배송을 취소할 수 없는 상태 입니다");
         this.orderStatus = OrderStatus.CANCELLED;
     }
 
