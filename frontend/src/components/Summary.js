@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SummaryItem } from './SummaryItem';
+import SummaryItem from './SummaryItem';
 import axios from 'axios';
 
 const Summary = ({ items = [] }) => {
