@@ -35,14 +35,12 @@ const Summary = ({ items = [] }) => {
 
     console.log(items);
     axios
-      .post('http://localhost:8080/api/v1/orders', {
+      .post('http://localhost:8080/order/add', {
         email: order.email,
         address: order.address,
         postcode: order.postcode,
         orderItems: items.map(v => ({
-          productId: v.productId,
-          category: v.category,
-          price: v.price,
+          id: v.productId,
           quantity: v.count,
         })),
       })

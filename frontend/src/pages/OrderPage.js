@@ -20,7 +20,7 @@ const OrderPage = () => {
     try {
       axios
         .get('http://localhost:8080/product/list')
-        .then(v => setProducts(v.data));
+        .then(v => setProducts(v.data.content));
     } catch (error) {
       console.log(error);
     }
