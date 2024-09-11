@@ -43,6 +43,9 @@ const OrderRoute = () => {
   const handlePageChanged = e => {
     getProducts(e.selected);
   };
+  const handleOrderSuccess = () => {
+    setItems([]);
+  };
 
   useEffect(() => {
     getProducts(0);
@@ -62,7 +65,11 @@ const OrderRoute = () => {
             />
           </div>
           <div className="col-md-4 summary p-4">
-            <Summary items={items} handleMinusItem={handleMinusItem} />
+            <Summary
+              items={items}
+              handleMinusItem={handleMinusItem}
+              handleOrderSuccess={handleOrderSuccess}
+            />
           </div>
         </div>
       </div>

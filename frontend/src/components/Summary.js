@@ -4,7 +4,7 @@ import axios from 'axios';
 import OrderForm from './OrderForm';
 import { formatPrice, calculateTotalPrice } from '../common';
 
-const Summary = ({ items = [], handleMinusItem }) => {
+const Summary = ({ items = [], handleMinusItem, handleOrderSuccess }) => {
   const totalPrice = calculateTotalPrice(items);
   const [order, setOrder] = useState({
     email: '',
@@ -21,19 +21,18 @@ const Summary = ({ items = [], handleMinusItem }) => {
   const handlePostcodeChanged = e => {
     setOrder({ ...order, postcode: e.target.value });
   };
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (order.address === '' || order.email === '' || order.postcode === '') {
       alert('유효하지 않은 입력입니다.');
       return;
     }
-
     if (items.length === 0) {
       alert('주문할 상품을 선택해주세요.');
       return;
     }
 
-    axios
-      .post('http://localhost:8080/order/add', {
+    try {
+      await axios.post('http://localhost:8080/order/add', {
         email: order.email,
         address: order.address,
         postcode: order.postcode,
@@ -41,12 +40,13 @@ const Summary = ({ items = [], handleMinusItem }) => {
           id: v.productId,
           quantity: v.quantity,
         })),
-      })
-      .then(
-        () => alert('주문이 정상적으로 접수되었습니다.'),
-        () => alert('주문에 실패했습니다.'),
-      );
-    // onOrderSubmit(order);
+      });
+      alert('주문이 접수되었습니다.');
+      setOrder({ email: '', address: '', postcode: '' });
+      handleOrderSuccess();
+    } catch (error) {
+      alert('주문에 실패했습니다.');
+    }
   };
 
   return (
