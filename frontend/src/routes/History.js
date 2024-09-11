@@ -58,7 +58,7 @@ const HistoryRoute = () => {
             <div className="card-container mt-4 d-flex flex-column align-items-start p-3 pt-0">
               <HistoryList
                 histories={histories}
-                handleCancleSuccess={() => getHistories(page.current)}
+                handleCancleSuccess={() => getHistories(page.current - 1)}
               />
               <div className="pagination-container">
                 <Pagination
