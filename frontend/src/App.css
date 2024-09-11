@@ -37,8 +37,8 @@
   }
 }
 
-body {
-  background: #ddd;
+.page-header {
+  max-width: 950px;
 }
 
 .card {
@@ -63,6 +63,13 @@ body {
     border-top-right-radius: unset;
     border-bottom-left-radius: 1rem;
   }
+}
+
+.background {
+  width: 100vw;
+  height: 100vw;
+  background: #ddd;
+  margin: 0;
 }
 
 .row {
