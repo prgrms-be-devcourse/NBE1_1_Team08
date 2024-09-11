@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const History = ({
   orderId,
+  email,
   address,
   postcode,
   orderStatus,
@@ -28,7 +29,6 @@ const History = ({
   const cancleOrder = async () => {
     try {
       await axios.get(`http://localhost:8080/order/cancle?id=${orderId}`);
-      console.log(`cancle order ${orderId}`);
       handleCancleSuccess();
     } catch (error) {
       console.log(error);
@@ -57,12 +57,12 @@ const History = ({
         {orderStatus !== 'ACCEPTED' ? null : (
           <div className="d-flex justify-content-end">
             <div className="col text-end action">
-              <button
-                onClick={handleDeleteBtnClick}
-                className="btn btn-sm btn-outline-dark"
+              <Link
+                to="/order-update"
+                state={{ id: orderId, email, address, postcode }}
               >
-                수정
-              </button>
+                <button className="btn btn-sm btn-outline-dark">수정</button>
+              </Link>
             </div>
             <div className="col text-end action">
               <button
