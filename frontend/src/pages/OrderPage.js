@@ -23,8 +23,21 @@ const OrderPage = () => {
     const product = products.find(v => v.productId === id);
     const found = items.find(v => v.productId === id);
     const updatedItems = found
-      ? items.map(v => (v.productId === id ? { ...v, count: v.count + 1 } : v))
-      : [...items, { ...product, count: 1 }];
+      ? items.map(v =>
+          v.productId === id ? { ...v, quantity: v.quantity + 1 } : v,
+        )
+      : [...items, { ...product, quantity: 1 }];
+    setItems(updatedItems);
+  };
+  const handleMinusItem = id => {
+    const found = items.find(v => v.productId === id);
+    const updatedItems = found
+      ? items
+          .map(v =>
+            v.productId === id ? { ...v, quantity: v.quantity - 1 } : v,
+          )
+          .filter(v => v.quantity > 0)
+      : items;
     setItems(updatedItems);
   };
   const handlePageChanged = e => {
@@ -49,7 +62,7 @@ const OrderPage = () => {
             />
           </div>
           <div className="col-md-4 summary p-4">
-            <Summary items={items} />
+            <Summary items={items} handleMinusItem={handleMinusItem} />
           </div>
         </div>
       </div>
