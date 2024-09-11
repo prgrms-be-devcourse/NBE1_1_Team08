@@ -38,7 +38,8 @@
 }
 
 .page-header {
-  max-width: 950px;
+  width: 90% !important;
+  max-width: 950px !important;
 }
 
 .card {
@@ -79,6 +80,13 @@
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
   }
+}
+
+.product-container {
+  height: 500px;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .background {
@@ -128,4 +136,34 @@ hr {
 .order-email-search .email {
   margin: 10px;
   width: auto;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.pagination {
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  > * {
+    cursor: pointer;
+  }
+}
+
+.pagination-link {
+  transition: all 0.25s;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.3rem;
+}
+
+.pagination-link-active {
+  background-color: #e5eefd;
+  color: #007bff;
 }

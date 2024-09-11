@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
-import { PageHeader, HistoryList } from '../components';
+import { PageHeader, HistoryList, Pagination } from '../components';
 import axios from 'axios';
 
 const HistoryPage = () => {
   const [email, setEmail] = useState();
   const [histories, setHistories] = useState();
+  const [page, setPage] = useState();
   const [isSearched, setIsSearched] = useState(false);
 
-  const getHistories = async () => {
+  const getHistories = async pageNumber => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/order/listEmail?email=${email}`,
+        `http://localhost:8080/order/listEmail?email=${email}&page=${pageNumber}`,
       );
-      setHistories(response.data.content);
       setIsSearched(true);
+      setHistories(response.data.content);
+      setPage({
+        current: response.data.pageable.pageNumber + 1,
+        totalPages: response.data.totalPages,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -21,6 +26,9 @@ const HistoryPage = () => {
 
   const handleEmailChanged = e => {
     setEmail(e.target.value);
+  };
+  const handlePageChanged = e => {
+    getHistories(e.selected);
   };
 
   return (
@@ -41,7 +49,7 @@ const HistoryPage = () => {
             />
             <button
               className="btn btn-sm btn-outline-dark me-2"
-              onClick={getHistories}
+              onClick={() => getHistories(0)}
             >
               검색
             </button>
@@ -50,8 +58,14 @@ const HistoryPage = () => {
             <div className="mt-4 d-flex flex-column align-items-start p-3 pt-0">
               <HistoryList
                 histories={histories}
-                handleCancleSuccess={getHistories}
+                handleCancleSuccess={() => getHistories(page.current)}
               />
+              <div className="pagination-container">
+                <Pagination
+                  pageCount={page.totalPages}
+                  onPageChange={handlePageChanged}
+                />
+              </div>
             </div>
           ) : (
             <div className="text-center align-self-center py-5">
