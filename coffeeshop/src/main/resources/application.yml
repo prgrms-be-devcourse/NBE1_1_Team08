@@ -28,5 +28,5 @@ spring:
 logging:
   level:
     root: info
-    org.springframework: INF O
+    com.demo.coffeeshop : debug
 #    com.security.day0904 : debug # 자신의 패키지명을 사용하여 디버그 레벨을 설정합니다.
