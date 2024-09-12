@@ -12,7 +12,8 @@ public class ProductUpdateDTO {
     private UUID id;
     private String productName;
     private String catagory;
-    private int price;
+    private long price;
+    private long stock;
     private String description;
     private String image_url;
 }

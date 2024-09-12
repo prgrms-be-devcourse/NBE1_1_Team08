@@ -7,5 +7,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderItemUpdateDTO {
     private Long id; // product id
-    private int quantity;
+    private long quantity;
 }

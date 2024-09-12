@@ -1,10 +1,7 @@
 package com.demo.coffeeshop.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @ToString
 @Entity(name = "products")
@@ -29,7 +26,9 @@ public class Products {
     @Column(length = 50)
     private String category;
 
-    private int price;
+    private long price;
+
+    private long stock;
 
     @Column(length = 500)
     private String description;
@@ -45,18 +44,25 @@ public class Products {
     @Column(length = 6)
     private LocalDateTime updatedAt;
 
-    public Products(String productName, String catagory, int price, String description, String image_url) {
+    public Products(String productName, String catagory, long price, long stock, String description, String image_url) {
         this.productName = productName;
         this.category = catagory;
         this.price = price;
+        this.stock = stock;
         this.description = description;
         this.image_url = image_url;
     }
 
-    public void changeInfo(String catagory, int price, String description, String image_url){
+    public void changeInfo(String catagory, long price, long stock, String description, String image_url){
         this.category = catagory;
         this.price = price;
+        this.stock = stock;
         this.description = description;
         this.image_url = image_url;
     }
+
+    public void changeStock(long stock){
+        this.stock = stock;
+    }
+
 }

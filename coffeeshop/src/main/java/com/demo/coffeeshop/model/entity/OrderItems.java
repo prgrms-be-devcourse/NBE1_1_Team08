@@ -2,10 +2,7 @@ package com.demo.coffeeshop.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -14,7 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @ToString(exclude = "orders")
 @Entity(name = "order_items")
@@ -36,9 +33,9 @@ public class OrderItems {
     @Column(length = 50)
     private String category;
 
-    private int price;
+    private long price;
 
-    private int quantity;
+    private long quantity;
 
     @CreationTimestamp
     @Column(name = "created_at",length = 6)
@@ -48,14 +45,14 @@ public class OrderItems {
     @Column(name = "updated_at", length = 6)
     private LocalDateTime updatedAt;
 
-    public OrderItems(Products products, int quantity) {
+    public OrderItems(Products products, long quantity) {
         this.products = products;
         this.category = products.getCategory();
         this.price = products.getPrice();
         this.quantity = quantity;
     }
 
-    public void changeQuantity(int quantity) {
+    public void changeQuantity(long quantity) {
         this.quantity = quantity;
     }
 
