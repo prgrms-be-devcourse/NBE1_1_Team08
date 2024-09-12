@@ -1,34 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { PageHeader } from '../components';
 import { formatPrice } from '../common';
+import axios from 'axios';
 
 const MainRoute = () => {
   const [topProducts, setTopProducts] = useState([]);
 
+  const getPopularProducts = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/product/popular');
+      setTopProducts(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    setTopProducts([
-      {
-        productId: 'b8506bb7-eb5d-47a8-81a3-4747bb767624',
-        img_url:
-          'https://image.istarbucks.co.kr/upload/store/skuimg/2023/11/[11059722]_20231110094425022.jpg',
-        productName: '디카페인 하우스 블렌드',
-        price: 11000,
-      },
-      {
-        productId: 'b8506bb7-eb5d-47a8-81a3-4747bb767624',
-        img_url:
-          'https://image.istarbucks.co.kr/upload/store/skuimg/2024/08/[11160368]_20240808101951857.jpg',
-        productName: '선 드라이드 브라질 파젠다 산타 클라',
-        price: 11000,
-      },
-      {
-        productId: 'b8506bb7-eb5d-47a8-81a3-4747bb767624',
-        img_url:
-          'https://image.istarbucks.co.kr/upload/store/skuimg/2023/11/[11059722]_20231110094425022.jpg',
-        productName: '디카페인 하우스 블렌드',
-        price: 11000,
-      },
-    ]);
+    getPopularProducts();
   }, []);
 
   return (
@@ -42,7 +30,7 @@ const MainRoute = () => {
           <div className="main-product-container my-5">
             {topProducts.map(v => (
               <div key={v.productId} className="product-item col">
-                <img src={v.img_url} />
+                <img src={v.image_url} />
                 <p className="product-name">
                   <span className="badge bg-success fs-6 w-auto text-break">
                     {v.productName}
