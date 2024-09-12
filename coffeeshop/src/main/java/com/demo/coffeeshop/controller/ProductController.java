@@ -58,6 +58,11 @@ public class ProductController {
         return ResponseEntity.ok().body(products);
     }
 
+    @GetMapping("/popular")
+    public List<ProductInfoDTO> popularList(){
+        return productService.showPopularProducts();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Products> view(@PathVariable UUID id){
         Products product = productService.showProductInfo(id);

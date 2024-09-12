@@ -6,6 +6,7 @@ import com.demo.coffeeshop.model.entity.Products;
 import com.demo.coffeeshop.model.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +45,13 @@ public class ProductService {
     public Page<ProductInfoDTO> showProducts(Pageable pageable) {
         Page<Products> productsPage = productRepository.findAll(pageable);
         return productsPage.map(ProductInfoDTO::new);
+    }
+
+    public List<ProductInfoDTO> showPopularProducts() {
+        int topNum = 3; // 상위 상품 N개
+        Pageable pageable = PageRequest.of(0, topNum);
+
+        return convertToProductInfoDTOs(productRepository.findPopularProducts(pageable).getContent());
     }
 
     public List<ProductInfoDTO> convertToProductInfoDTOs(List<Products> input){
