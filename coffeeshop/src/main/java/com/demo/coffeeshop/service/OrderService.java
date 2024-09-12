@@ -9,6 +9,8 @@ import com.demo.coffeeshop.model.entity.enums.OrderStatus;
 import com.demo.coffeeshop.model.repository.OrderRepository;
 import com.demo.coffeeshop.model.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,12 +26,19 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     @Transactional
-    public UUID order(OrderRequestDTO orderRequest) {
+    public UUID order(OrderRequestDTO orderRequest) throws Exception {
         List<OrderItems> orderItems = new ArrayList<>();
 
         for (OrderRequestDTO.OrderItem item : orderRequest.getOrderItems()) {
             Products product = productRepository.findByProductId(item.getId());
+
+            if(product.getStock() < item.getQuantity()){
+                throw new Exception("재고수량 부족으로 구매가 불가한 상품이 있습니다.");
+            }
             orderItems.add(new OrderItems(product, item.getQuantity()));
+            //제품 재고 변경
+            product.changeStock(product.getStock() - item.getQuantity());
+            productRepository.save(product);
         }
 
         Orders order = Orders.createOrder(orderRequest.getEmail(),
@@ -63,15 +72,18 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-    public List<Orders> findOrders(){
-        return orderRepository.findAll();
+    // 변경: 페이징을 적용한 주문 목록 조회
+    public Page<Orders> findOrders(Pageable pageable) {
+        return orderRepository.findAll(pageable);
     }
 
-    public List<Orders> findByEmail(String email){
-        return orderRepository.findAllByEmail(email);
+    // 변경: 이메일로 주문 조회에 페이징 적용
+    public Page<Orders> findByEmail(String email, Pageable pageable) {
+        return orderRepository.findAllByEmail(email, pageable);
     }
 
-    public List<Orders> findByOrderStatus(OrderStatus status){
-        return orderRepository.findAllByOrderStatus(status);
+    // 변경: 주문 상태로 조회에 페이징 적용
+    public Page<Orders> findByOrderStatus(OrderStatus status, Pageable pageable) {
+        return orderRepository.findAllByOrderStatus(status, pageable);
     }
 }
