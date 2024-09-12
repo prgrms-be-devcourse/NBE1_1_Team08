@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+
 import java.util.UUID;
 
 @Repository
@@ -16,9 +17,9 @@ public interface ProductRepository extends JpaRepository<Products, UUID> {
     //    Page<Products> findAll(Pageable pageable);
 
     @Query("SELECT oi.products FROM order_items oi " +
-            "WHERE oi.orders.orderStatus <> 'ACCEPTED' " +
-            "AND oi.orders.orderStatus <> 'PAYMENT_CONFIRMED' " +
-            "AND oi.orders.orderStatus <> 'CANCELLED' " +
+            "WHERE oi.orders.orderStatus IN (com.demo.coffeeshop.model.entity.enums.OrderStatus.READY_FOR_DELIVERY, " +
+            "com.demo.coffeeshop.model.entity.enums.OrderStatus.SHIPPED, " +
+            "com.demo.coffeeshop.model.entity.enums.OrderStatus.SETTLED) " +
             "GROUP BY oi.products.productId ORDER BY SUM(oi.quantity) DESC")
     Page<Products> findPopularProducts(Pageable pageable);
 }
