@@ -14,8 +14,8 @@ import java.util.UUID;
 public interface ProductRepository extends JpaRepository<Products, UUID> {
 
     Products findByProductId(UUID uuid);
-    //    Page<Products> findAll(Pageable pageable);
 
+    //    Page<Products> findAll(Pageable pageable);
     @Query("SELECT oi.products FROM order_items oi " +
             "WHERE oi.orders.orderStatus IN (com.demo.coffeeshop.model.entity.enums.OrderStatus.READY_FOR_DELIVERY, " +
             "com.demo.coffeeshop.model.entity.enums.OrderStatus.SHIPPED, " +
