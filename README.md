@@ -129,14 +129,14 @@ CREATE TABLE order_items
 # 💼Usecase diagram
 
 <center>
-<img src="image/usecase_diagram_user.png" width="40%" height="40%">
-<img src="image/usecase_diagram_admin.png" width="30%" height="30%">
+<img src="image/usecase_diagram_user.png" width="80%" height="80%">
+<img src="image/usecase_diagram_admin.png" width="80%" height="80%">
 </center>
 
 # ⏩Flow chart
 
 <center>
-<img src="image/flowchart.png" width="50%" height="50%">
+<img src="image/flowchart.png" width="80%" height="80%">
 </center>
 
 # 📟화면
