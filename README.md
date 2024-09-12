@@ -1,7 +1,5 @@
 # 📽️프로젝트 명세서
 
-***
-
 ### Background
 
 우리는 작은 로컬 카페 **Grids & Circles** 입니다. 고객들이 Coffe Bean package를 온라인 웹 사이트로 주문합니다. 매일 전날 오후 2시부터 오늘 오후 2시까지의 주문을 모아서
@@ -13,21 +11,18 @@
 보내면 됩니다.
 
 <aside>
-💡
-
-고객에게 **“당일 오후 2시 이후의 주문은 다음날 배송을 시작합니다.”** 라고 알려 줍니다.
+💡 고객에게 **“당일 오후 2시 이후의 주문은 다음날 배송을 시작합니다.”** 라고 알려 줍니다.
 
 </aside>
 
 ### **결과물 예시**
 
 <center>
-<img src="image/init1.png" width="40%" height="40%">
-<img src="image/init2.png" width="50%" height="50%">
-<img src="image/init3.png" width="50%" height="50%">
+<img src="image/init1.png" width="70%" height="70%">
+<img src="image/init2.png" width="70%" height="70%">
+<img src="image/init3.png" width="70%" height="70%">
 </center>
 
-***
 
 # 👥팀원
 
@@ -38,7 +33,6 @@
 - 이민정 - 인기 상품 조회 API 및 서비스 개발
 - 이현섭 - 페이징 기능 개발, 테스트 데이터 작업
 
-***
 
 ## 👤 사용자
 
@@ -149,17 +143,17 @@ CREATE TABLE order_items
 
 - **메인 페이지**:
     - 현재 판매량 기준 인기 상품 조회
-    <div><img src="image/front1.png" width="60%" height="60%"></div>
+    <div><img src="image/front1.png" width="80%" height="80%"></div>
 - **주문 페이지**:
-  <div><img src="image/front2.gif" width="60%" height="60%"> </div>
+  <div><img src="image/front2.gif" width="80%" height="80%"> </div>
   
     - 사용자가 상품을 주문하는 페이지
     - 상품 목록을 페이징해서 보여줍니다.
     - 장바구니(Summary)에 상품을 추가하고 제거할 수 있습니다.
 - **주문 내역 페이지**:
     <div>
-        <img src="image/front3.gif" width="60%" height="60%">
-        <img src="image/front4.gif" width="60%" height="60%"> 
+        <img src="image/front3.gif" width="80%" height="80%">
+        <img src="image/front4.gif" width="80%" height="80%"> 
     </div>
     
     - 이메일로 사용자의 주문 내역을 페이징해서 보여줍니다.
@@ -179,4 +173,4 @@ CREATE TABLE order_items
 - **release** : 프로젝트 배포를 준비하기 위해 사용하는 브랜치
 - **develop** : 개발 과정에서 사용하는 중심 브랜치
     - **feat** : 각 기능을 구현할 때 사용하는 브랜치
-    <div><img src="image/gitflow.png" width="60%" height="60%"></div> 
+    <div><img src="image/gitflow.png" width="80%" height="80%"></div> 
